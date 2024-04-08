@@ -4,18 +4,18 @@ import smtplib
 import time
 import html5lib
 
-URL = input("Enter Amazon URL: ")
+URL = input("Enter Amazon URL: https://www.amazon.com/dp/B08PZHYWJS/ref=fs_a_mdt2_us3 ")
 
-headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.88 Safari/537.36", "DNT":"1","Connection":"close", "Upgrade-Insecure-Requests":"1"}
+headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0"}
 
-offerprice = float(input("Enter Wanted Price: "))
+offerprice = float(input("Enter Wanted Price: $400 "))
 
 server = smtplib.SMTP('smtp.gmail.com', 587)
 server.ehlo()
 server.starttls()
 server.ehlo()
 server.login('trackeramzn@gmail.com', 'Shared83617')
-user_email = input("Enter your email: ")
+user_email = input("Enter your email: dejaboney1025@gmail.com ")
 
 def check_price(URL,Price):
     page = requests.get(URL, headers=headers)
