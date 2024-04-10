@@ -2,49 +2,48 @@ import requests
 from bs4 import BeautifulSoup
 import smtplib
 import time
-import html5lib
 
-URL = input("Enter Amazon URL: https://www.amazon.com/dp/B08PZHYWJS/ref=fs_a_mdt2_us3 ")
+URL = 'https://www.amazon.com/dp/B08PZHYWJS/ref=fs_a_mdt2_us3'
 
 headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0"}
 
-offerprice = float(input("Enter Wanted Price: $400 "))
+page = requests.get(URL, headers=headers)
 
-server = smtplib.SMTP('smtp.gmail.com', 587)
-server.ehlo()
-server.starttls()
-server.ehlo()
-server.login('trackeramzn@gmail.com', 'Shared83617')
-user_email = input("Enter your email: dejaboney1025@gmail.com ")
+soup = BeautifulSoup(page.content, 'html.parser')
 
-def check_price(URL,Price):
-    page = requests.get(URL, headers=headers)
+title = soup.find(id="productTitle").get_text()
+price = soup.find(id="priceblock_ourprice").get_text()
+converted_price = float(price[0:3])
 
-    soup1 = BeautifulSoup(page.content, "html5lib")
-
-    soup2 = BeautifulSoup(soup1.prettify(), "html5lib")
-
-    title = soup2.find(id="productTitle").get_text().strip()
-
-    price = soup2.find('span', class_='a-offscreen').get_text().strip()
-    priceWithoutSign = price.split("$")[1]
-    floatprice = float(priceWithoutSign)
-    if floatprice <= Price:
-        send_mail(server)
-    print(title)
-    print(floatprice)  
+if(converted_price < 545): 
+    send_mail()
     
-def send_mail(server):
+print(converted_price)
+print(title.strip())
+
+if(converted_price > 545):
+    send_mail()
+def send_mail():
+    server = smtplib.STMP('smtp.gmail.com',587)
+    server.ehlo()
+    server.starttls()
+    server.ehlo()
+
+    server.login('dejaboney1025@gmail.com',' lovecupcakes1')
+
     subject = 'Price has dropped!'
-    body = 'Check the amazon link below to see your deal!', URL
+    body = 'Check the amazon link below to see the price drop!'https://www.amazon.com/dp/B08PZHYWJS/ref=fs_a_mdt2_us3'
+    
     msg = f"Subject: {subject}\n\n{body}"
-    server.sendmail('TrackerAMZN@gmail.com',user_email,msg)
-    print('MESSAGE HAS BEEN SENT')
-try:    
-    while(True):    
-        check_price(URL, offerprice)
-        time.sleep(15)
-except KeyboardInterrupt:
+    
+    server.sendmail(
+    'dejaboney1025@gmail.com'
+    msg
+    )
+    print('EMAIL HAS BEEN SENT')
+    
     server.quit()
 
-
+while(True): 
+ check_price()
+ time.sleep(60 * 60 )
