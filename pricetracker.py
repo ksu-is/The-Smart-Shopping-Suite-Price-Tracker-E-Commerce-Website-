@@ -1,7 +1,20 @@
+#import the necessary libraries 
+
 import requests
 from bs4 import BeautifulSoup
-import smtplib
 import time
+import smtplib
+from ipywidgets import interact, widgets
+
+class AmazonPriceTracker:
+    def(self, target_price, sender_email, sender_password, receiver_email):
+        self.url = url
+        self.target_price = target_price
+        self.sender_email = sender_email
+        self.sender_password = sender_password
+        self.receiver_email = receiver_email
+
+#define the URL and create user agent info
 
 URL = 'https://www.amazon.com/dp/B08PZHYWJS/ref=fs_a_mdt2_us3'
 
