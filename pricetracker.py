@@ -1,5 +1,3 @@
-#import the necessary libraries 
-
 import requests
 from bs4 import BeautifulSoup
 import time
@@ -14,7 +12,6 @@ class AmazonPriceTracker:
         self.sender_password = sender_password
         self.receiver_email = receiver_email
 
-#define the URL and create user agent info
     def get_product_info(self):
         headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0"}
         page = requests.get(self.url, headers=headers)
@@ -24,7 +21,6 @@ class AmazonPriceTracker:
         converted_price = float(price[1:].replace(',', ''))
         return title, converted_price
 
-#send email if the price drops below the target price
     def send_notification(self, title, price):
         subject = f'Price Dropped for {title}'
         body = f'The price has dropped to ${price}!\nCheck it out here: {self.url}'
@@ -36,7 +32,6 @@ class AmazonPriceTracker:
             smtp.login(self.sender_email, self.send_password)
             smtp.sendmail(self.sender_email, self.receiver_email, message)
         
-#track price of the product and sends notification if price drops below the target price
     def track_price(self)
         while True:
             title, price = self.get_product_info()
@@ -53,23 +48,11 @@ def start_price_tracker(url, target_price, sender_email, sender_password, receiv
 
 default_url = 'https://www.amazon.com/dp/B07V1SQ966/'
 
+interact(start_price_tracker, 
+         url=widgets.Text(value=default-url, placeholder='Enter Amazon Product URL'),
+         target_price=widgets.FloatText(placeholder='Enter Target Price'),
+         sender_email=widges.Text(placeholder='Enter Sender Email'),
+         sender_password=widgets.Password(placeholder='Enter Sender Email Password'),
+         receiver_email=widgets.Text(placeholder='Eneter Receiver Email'))
+
         
-
-    server.login('dejaboney1025@gmail.com',' lovecupcakes1')
-
-    subject = 'Price has dropped!'
-    body = 'Check the amazon link below to see the price drop!'https://www.amazon.com/dp/B08PZHYWJS/ref=fs_a_mdt2_us3'
-    
-    msg = f"Subject: {subject}\n\n{body}"
-    
-    server.sendmail(
-    'dejaboney1025@gmail.com'
-    msg
-    )
-    print('EMAIL HAS BEEN SENT')
-    
-    server.quit()
-
-while(True): 
- check_price()
- time.sleep(60 * 60 )
