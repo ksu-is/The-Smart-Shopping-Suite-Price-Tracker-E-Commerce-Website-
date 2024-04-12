@@ -46,7 +46,12 @@ class AmazonPriceTracker:
                 self.send_notification(title, price)
                 break
             time.sleep(3600)
+            
+def start_price_tracker(url, target_price, sender_email, sender_password, receiver_email):
+    tracker = AmazonPriceTracker(url, target_price, sender_email, sender_password, receiver email)
+    tracker.track_price()
 
+default_url = 'https://www.amazon.com/dp/B07V1SQ966/'
 
         
 
