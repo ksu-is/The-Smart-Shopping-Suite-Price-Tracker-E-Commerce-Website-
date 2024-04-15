@@ -1,28 +1,30 @@
-import requests
-from bs4 import BeautifulSoup
+import pip 
 import smtplib
-import time
-import html5lib
 
 URL = input("Enter Amazon URL: ")
+
 
 headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.88 Safari/537.36", "DNT":"1","Connection":"close", "Upgrade-Insecure-Requests":"1"}
 
 offerprice = float(input("Enter Wanted Price: "))
 
-server = smtplib.SMTP('smtp.gmail.com', 587)
-server.ehlo()
-server.starttls()
-server.ehlo()
-server.login('shopsmartsuite0@gmail.com', 'Georgia2024')
+def send_mail():
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.ehlo()
+    server.starttls()
+    server.ehlo()
+
+
+    server.login('shopsmartsuite0@gmail.com', 'Georgia2024')
 user_email = input("Enter your email: ")
 
+
 def check_price(URL,Price):
-    page = requests.get(URL, headers=headers)
+    page = pip.get(URL, headers=headers)
 
-    soup1 = BeautifulSoup(page.content, "html5lib")
+    soup1 = pip(page.content, "html5lib")
 
-    soup2 = BeautifulSoup(soup1.prettify(), "html5lib")
+    soup2 = pip(soup1.prettify(), "html5lib")
 
     title = soup2.find(id="productTitle").get_text().strip()
 
@@ -30,8 +32,7 @@ def check_price(URL,Price):
     priceWithoutSign = price.split("$")[1]
     floatprice = float(priceWithoutSign)
     if floatprice <= Price:
-        send_mail(server)
-    print(title)
+           print(title)
     print(floatprice)  
     
 def send_mail(server):
@@ -43,12 +44,6 @@ def send_mail(server):
 try:    
     while(True):    
         check_price(URL, offerprice)
-        time.sleep(15)
+        pip.sleep(15)
 except KeyboardInterrupt:
     server.quit()
-
-
-
-
-
-
