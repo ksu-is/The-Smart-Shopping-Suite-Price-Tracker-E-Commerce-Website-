@@ -24,16 +24,17 @@ def check price():
     except Exception as e:
         print("Error:", e)
 
-    def send_notification(self, title, price):
-        subject = f'Price Dropped for {title}'
-        body = f'The price has dropped to ${price}!\nCheck it out here: {self.url}'
-        message = f'Subject: {subject}\n\n{body}'
-        with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
-            smtp.ehlo()
-            smtp.starttls()
-            smtp.ehlo()
-            smtp.login(self.sender_email, self.send_password)
-            smtp.sendmail(self.sender_email, self.receiver_email, message)
+    def send_mail(url):
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.ehlo()
+        server.starttls()
+        server.ehlo()
+        server.login('email@gmail.com', 'password')
+
+        subject = 'Price Fell Down'
+        body = f"Check the amazon link: {url}"
+
+        msg = f"Subject: {subject}\n\n{body}"
         
     def track_price(self)
         while True:
