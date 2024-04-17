@@ -19,14 +19,10 @@ def check price():
         print("Product:", title)
         print("Price:", converted_price)
         
-    def get_product_info(self):
-        headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0"}
-        page = requests.get(self.url, headers=headers)
-        soup = BeautifulSoup(page.content, 'html.parser')
-        title = soup.find(id="productTitle").get_text().strip
-        price = soup.find(id="priceblock_ourprice").get_text()
-        converted_price = float(price[1:].replace(',', ''))
-        return title, converted_price
+        if converted price < 20000:
+            send_mail(url)
+    except Exception as e:
+        print("Error:", e)
 
     def send_notification(self, title, price):
         subject = f'Price Dropped for {title}'
