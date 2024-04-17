@@ -36,27 +36,16 @@ def check price():
 
         msg = f"Subject: {subject}\n\n{body}"
         
-    def track_price(self)
-        while True:
-            title, price = self.get_product_info()
-            print(f"Current Price for '{title}': ${price}")
-            if price <= self.target_price:
-                print(f"Price dropped below ${self.target_price}! But now!")
-                self.send_notification(title, price)
-                break
-            time.sleep(3600)
+        server.sendmail(
+            'sender@gmail.com',
+            'receiver@gmail.com,
+            msg
+        )
+        print('Email has been sent')
+        server.quit()
             
-def start_price_tracker(url, target_price, sender_email, sender_password, receiver_email):
-    tracker = AmazonPriceTracker(url, target_price, sender_email, sender_password, receiver email)
-    tracker.track_price()
-
-default_url = 'https://www.amazon.com/dp/B07V1SQ966/'
-
-interact(start_price_tracker, 
-         url=widgets.Text(value=default-url, placeholder='Enter Amazon Product URL'),
-         target_price=widgets.FloatText(placeholder='Enter Target Price'),
-         sender_email=widges.Text(placeholder='Enter Sender Email'),
-         sender_password=widgets.Password(placeholder='Enter Sender Email Password'),
-         receiver_email=widgets.Text(placeholder='Eneter Receiver Email'))
+for i in range(24):
+    check_price()
+    time.sleep(3600)
 
         
