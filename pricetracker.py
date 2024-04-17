@@ -1,16 +1,14 @@
 import requests
 from bs4 import BeautifulSoup
-import time
 import smtplib
-from ipywidgets import interact, widgets
+import time
 
-class AmazonPriceTracker:
-    def(self, target_price, sender_email, sender_password, receiver_email):
-        self.url = url
-        self.target_price = target_price
-        self.sender_email = sender_email
-        self.sender_password = sender_password
-        self.receiver_email = receiver_email
+def check price():
+    headers = {
+        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
+    }
+    url = 'https://www.amazon.in/Bose-SoundLink-Wireless-Around_Ear_Headphones/dp/B0117RGG8E/ref=sr_1_11?qid=1562395272&refinements=p_89%3ABose&s=electronics&sr=1-11'
+
 
     def get_product_info(self):
         headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0"}
