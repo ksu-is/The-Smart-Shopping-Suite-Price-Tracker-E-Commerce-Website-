@@ -6,12 +6,12 @@ Sprint 1
 - [X] Create a projectroadmap.md
       
   Sprint 2
-- [] Run the code, locate problems under 'Problems' tab 
-- [] Analyze code in Visual Studio, leave comments for each problem 
-- [] Assign each problem to a group member 
+- [X] Run the code, locate problems under 'Problems' tab 
+- [X] Analyze code in Visual Studio, leave comments for each problem 
+- [X] Assign each problem to a group member 
 - [] Work each problem and find a solution
-- [] Make notes of successful changes, and also unscuccessful attempts
-- [] Discuss progress with group memebrs/Exchange notes
+- [X] Make notes of successful changes, and also unscuccessful attempts
+- [X] Discuss progress with group memebrs/Exchange notes
       
       Sprint 3
 - [] Create a power point slide presentation 
