@@ -9,7 +9,16 @@ def check price():
     }
     url = 'https://www.amazon.in/Bose-SoundLink-Wireless-Around_Ear_Headphones/dp/B0117RGG8E/ref=sr_1_11?qid=1562395272&refinements=p_89%3ABose&s=electronics&sr=1-11'
 
+    try:
+        response = requests.get(url, headers=headers)
+        soup = BeautifulSoup(response.content, 'html.parser')
 
+        title = soup.find(id="productTitle").get_text().strip()
+        price = soup.find(id="priceblock_ourprice").get_text().replace(',', '').strip()
+        converted price = float(price)
+        print("Product:", title)
+        print("Price:", converted_price)
+        
     def get_product_info(self):
         headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0"}
         page = requests.get(self.url, headers=headers)
