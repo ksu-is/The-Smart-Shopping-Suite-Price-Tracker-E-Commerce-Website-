@@ -19,7 +19,7 @@ def check price():
         print("Product:", title)
         print("Price:", converted_price)
         
-        if converted price < 20000:
+        if converted_price < 20000:
             send_mail(url)
     except Exception as e:
         print("Error:", e)
@@ -38,7 +38,7 @@ def check price():
         
         server.sendmail(
             'sender@gmail.com',
-            'receiver@gmail.com,
+            'receiver@gmail.com', 
             msg
         )
         print('Email has been sent')
