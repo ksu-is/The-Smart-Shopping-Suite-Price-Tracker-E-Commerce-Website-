@@ -31,6 +31,20 @@ headers = {
     def check_price(URL, Price):
         page = requests.get(URL, headers=headers) 
         soup = BeautifulSoup(page.content, 'htmlparser')
+
+        title_element = soup.find(id="taxInclusiveMessage")
+        if title_element:
+            title = title_element.get_text().strip()
+        else:
+            title = "Title Not Found"
+
+        price_element = soup.find('span', class_='a-offscreen')
+        if price_element:
+            price = float(price_element.get_text().strip().replace('$', ''))
+            print(title)
+            print(price)
+
+    
         
             
 for i in range(24):
