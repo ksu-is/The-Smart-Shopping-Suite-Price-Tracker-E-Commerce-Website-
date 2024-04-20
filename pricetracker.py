@@ -44,11 +44,14 @@ headers = {
             print(title)
             print(price)
 
-    
+            if price <= Price:
+                send_mail()
         
-            
-for i in range(24):
-    check_price()
-    time.sleep(3600)
+    try:
+        while True:
+            check_price(URL, offer_price)
+            time.sleep(60 * 60)
+    except KeyboardInterrupt:
+        pass
 
         
