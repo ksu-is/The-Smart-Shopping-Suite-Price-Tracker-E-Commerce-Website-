@@ -19,10 +19,10 @@ headers = {
         server.ehlo()
         server.starttls()
         server.ehlo()
-        server.login('email@gmail.com', 'password')
+        server.login('shopsmartsuite.com', 'Georgia2024')
 
-        subject = 'Price Fell Down'
-        body = f"Check the amazon link: {url}"
+        subject = 'Price Has Dropped!'
+        body = f'Check the Amazon link below to see your deal: {URL}
 
         msg = f"Subject: {subject}\n\n{body}"
         
