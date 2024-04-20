@@ -23,16 +23,15 @@ headers = {
 
         subject = 'Price Has Dropped!'
         body = f'Check the Amazon link below to see your deal: {URL}
-
         msg = f"Subject: {subject}\n\n{body}"
-        
-        server.sendmail(
-            'sender@gmail.com',
-            'receiver@gmail.com', 
-            msg
-        )
-        print('Email has been sent')
+        server.sendmail('shopsmartsuite0@gmail.com', user_email, msg)
+        print('MESSAGE HAS BEEN SENT')
         server.quit()
+        
+    def check_price(URL, Price):
+        page = requests.get(URL, headers=headers) 
+        soup = BeautifulSoup(page.content, 'htmlparser')
+        
             
 for i in range(24):
     check_price()
