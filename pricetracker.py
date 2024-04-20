@@ -3,26 +3,16 @@ from bs4 import BeautifulSoup
 import smtplib
 import time
 
-def check price():
-    headers = {
-        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
-    }
-    url = 'https://www.amazon.in/Bose-SoundLink-Wireless-Around_Ear_Headphones/dp/B0117RGG8E/ref=sr_1_11?qid=1562395272&refinements=p_89%3ABose&s=electronics&sr=1-11'
+URL = input("Enter Amazon URL: ")
+offer_price = float(input("Enter Wanted Price: "))
+user_email = input("Enter your email:) 
 
-    try:
-        response = requests.get(url, headers=headers)
-        soup = BeautifulSoup(response.content, 'html.parser')
-
-        title = soup.find(id="productTitle").get_text().strip()
-        price = soup.find(id="priceblock_ourprice").get_text().replace(',', '').strip()
-        converted price = float(price)
-        print("Product:", title)
-        print("Price:", converted_price)
-        
-        if converted_price < 20000:
-            send_mail(url)
-    except Exception as e:
-        print("Error:", e)
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.88 Safari/537.36",
+    "DNT": "1", 
+    "Connection": "close",
+    "Upgrade-Insecure-Requests": "1"
+}
 
     def send_mail(url):
         server = smtplib.SMTP('smtp.gmail.com', 587)
