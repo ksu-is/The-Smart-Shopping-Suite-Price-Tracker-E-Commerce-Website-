@@ -12,6 +12,8 @@ Sprint 1
 - [X] Work each problem and find a solution
 - [X] Make notes of successful changes, and also unscuccessful attempts
 - [X] Discuss progress with group memebrs/Exchange notes
+- [X] Play around with new code to show your understandings
+- [X] Understand the errors of your project and how you can fix them.
       
       Sprint 3
 - [] Create a power point slide presentation 
