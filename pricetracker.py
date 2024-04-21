@@ -28,7 +28,7 @@ def send_mail(url):
         print('MESSAGE HAS BEEN SENT')
         server.quit()
         
-    def check_price(URL, Price):
+def check_price(URL, Price):
         page = requests.get(URL, headers=headers) 
         soup = BeautifulSoup(page.content, 'htmlparser')
 
@@ -47,11 +47,11 @@ def send_mail(url):
             if price <= Price:
                 send_mail()
         
-    try:
+try:
         while True:
             check_price(URL, offer_price)
             time.sleep(60 * 60)
-    except KeyboardInterrupt:
+except KeyboardInterrupt:
         pass
 
         
