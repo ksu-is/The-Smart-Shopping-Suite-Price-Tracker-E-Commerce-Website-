@@ -14,7 +14,7 @@ headers = {
     "Upgrade-Insecure-Requests": "1"
 }
 
-    def send_mail(url):
+def send_mail(url):
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.ehlo()
         server.starttls()
