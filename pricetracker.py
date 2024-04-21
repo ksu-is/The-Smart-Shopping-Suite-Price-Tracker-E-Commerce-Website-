@@ -3,49 +3,55 @@ from bs4 import BeautifulSoup
 import smtplib
 import time
 
-def check price():
-    headers = {
-        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
-    }
-    url = 'https://www.amazon.in/Bose-SoundLink-Wireless-Around_Ear_Headphones/dp/B0117RGG8E/ref=sr_1_11?qid=1562395272&refinements=p_89%3ABose&s=electronics&sr=1-11'
+URL = input("Enter Amazon URL: ")
+offer_price = float(input("Enter Wanted Price: "))
+user_email = input("Enter your email:) 
 
-    try:
-        response = requests.get(url, headers=headers)
-        soup = BeautifulSoup(response.content, 'html.parser')
-
-        title = soup.find(id="productTitle").get_text().strip()
-        price = soup.find(id="priceblock_ourprice").get_text().replace(',', '').strip()
-        converted price = float(price)
-        print("Product:", title)
-        print("Price:", converted_price)
-        
-        if converted_price < 20000:
-            send_mail(url)
-    except Exception as e:
-        print("Error:", e)
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.88 Safari/537.36",
+    "DNT": "1", 
+    "Connection": "close",
+    "Upgrade-Insecure-Requests": "1"
+}
 
     def send_mail(url):
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.ehlo()
         server.starttls()
         server.ehlo()
-        server.login('email@gmail.com', 'password')
+        server.login('shopsmartsuite.com', 'Georgia2024')
 
-        subject = 'Price Fell Down'
-        body = f"Check the amazon link: {url}"
-
+        subject = 'Price Has Dropped!'
+        body = f'Check the Amazon link below to see your deal: {URL}
         msg = f"Subject: {subject}\n\n{body}"
-        
-        server.sendmail(
-            'sender@gmail.com',
-            'receiver@gmail.com', 
-            msg
-        )
-        print('Email has been sent')
+        server.sendmail('shopsmartsuite0@gmail.com', user_email, msg)
+        print('MESSAGE HAS BEEN SENT')
         server.quit()
-            
-for i in range(24):
-    check_price()
-    time.sleep(3600)
+        
+    def check_price(URL, Price):
+        page = requests.get(URL, headers=headers) 
+        soup = BeautifulSoup(page.content, 'htmlparser')
+
+        title_element = soup.find(id="taxInclusiveMessage")
+        if title_element:
+            title = title_element.get_text().strip()
+        else:
+            title = "Title Not Found"
+
+        price_element = soup.find('span', class_='a-offscreen')
+        if price_element:
+            price = float(price_element.get_text().strip().replace('$', ''))
+            print(title)
+            print(price)
+
+            if price <= Price:
+                send_mail()
+        
+    try:
+        while True:
+            check_price(URL, offer_price)
+            time.sleep(60 * 60)
+    except KeyboardInterrupt:
+        pass
 
         
