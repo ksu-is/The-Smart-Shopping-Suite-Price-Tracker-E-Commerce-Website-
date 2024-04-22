@@ -29,14 +29,10 @@ def send_mail(url):
         msg = f"Subject: {subject}\n\n{body}"
         server.sendmail('shopsmartsuite0@gmail.com', user_email, msg)
 
-        body = f'Check the Amazon link below to see your deal: {url}'
-        server.sendmail('shopsmartsuite0@gmail.com', user_email, msg)
-
         print('MESSAGE HAS BEEN SENT')
         server.quit()
         
 def check_price(URL, Price):
-        page = requests.get(URL, headers=headers)
 
         page = requests.get(URL, headers=headers)
         soup = BeautifulSoup(page.content, 'html.parser')
@@ -58,11 +54,6 @@ def check_price(URL, Price):
         else: 
             print("Element Not Found")
 
-
-            if price < 1:
-                send_mail()
-            else:
-                print("Element Not Found")
 
 try:
         while True:
