@@ -22,19 +22,17 @@ def send_mail(url):
         server.ehlo()
         server.login('shopsmartsuite0@gmail.com', 'Georgia2024')
 
-        shopsmartsuite_email = 'shopsmartsuite0@gmail.com'
-        gmail_domain = 'gmail.com'
         
-        subject = 'Price Has Dropped!'
-        body = f'Check the Amazon link below to see your deal: {URL}
+        subject = 'Price has dropped!'
+        body = f'Check the Amazon link below to see your deal: {url}'
         msg = f"Subject: {subject}\n\n{body}"
-        server.sendmail(f'shopsmartsuite0@gmail.com', user_email, msg)
+        server.sendmail('shopsmartsuite0@gmail.com', user_email, msg)
         print('MESSAGE HAS BEEN SENT')
         server.quit()
         
 def check_price(URL, Price):
-        page = requests.get(URL, headers=headers) 
-        soup = BeautifulSoup(page.content, 'htmlparser')
+        page = requests.get(URL, headers=headers)
+        soup = BeautifulSoup(page.content, 'html.parser')
 
         title_element = soup.find(id="taxInclusiveMessage")
         if title_element:
@@ -44,13 +42,15 @@ def check_price(URL, Price):
 
         price_element = soup.find('span', class_='a-offscreen')
         if price_element:
-            price = float(price_element.get_text().strip().replace('$', ''))
+            price = float(price_element.get_text().strip().replace('$', '').replace(',',''))
             print(title)
             print(price)
 
             if price <= Price:
-                send_mail()
-        
+                send_mail(URL, user_email)
+        else: 
+            print("Element Not Found")
+
 try:
         while True:
             check_price(URL, offer_price)
