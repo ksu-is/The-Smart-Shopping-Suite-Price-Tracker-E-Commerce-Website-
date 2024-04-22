@@ -22,7 +22,7 @@ def send_mail(url):
         server.ehlo()
         server.login('shopsmartsuite0@gmail.com', 'Georgia2024')
 
-        shopsmartsuite_email = 'shopsmartsuite0@gmail.com
+        shopsmartsuite_email = 'shopsmartsuite0@gmail.com'
         gmail_domain = 'gmail.com'
         
         subject = 'Price Has Dropped!'
