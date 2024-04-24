@@ -15,7 +15,7 @@ headers = {
     "Upgrade-Insecure-Requests": "1"
 }
 
-def send_mail(url):
+def send_mail(url, user_email):
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.ehlo()
         server.starttls()
@@ -54,11 +54,20 @@ def check_price(URL, Price):
         else: 
             print("Element Not Found")
 
+def set_interval():
+      try:
+            interval = int(input("Enter the time interval in minutes for checking the price: "))
+            return interval * 60
+      except ValueError:
+            print("Please enter a valid integeer for the time interval. ")
+            return set_interval()
+
 
 try:
+        interval_seconds = set_interval()
         while True:
             check_price(URL, offer_price)
-            time.sleep(60 * 60)
+            time.sleep(interval_seconds)
 except KeyboardInterrupt:
         pass
 
