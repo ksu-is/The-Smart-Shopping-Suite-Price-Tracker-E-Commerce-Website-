@@ -43,16 +43,31 @@ def check_price(URL, Price):
         else:
             title = "Title Not Found"
 
-        price_element = soup.find('span', class_='a-offscreen')
-        if price_element:
-            price = float(price_element.get_text().strip().replace('$', '').replace(',',''))
-            print(title)
-            print(price)
+        availability_element = soup.find(id="availability")
+        if availability_element:
+              availability = availability_element.get_text().strip()
+        else:
+              availability = "Availabilty Not Found"
+        
+        if "in stock" in availability.lower():
+            price_element = soup.find('span', class_='a-offscreen')
+            if price_element:
+                price = float(price_element.get_text().strip().replace('$', '').replace(',',''))
+                print(title)
+                print(price)
 
-            if price <= Price:
-                send_mail(URL, user_email)
-        else: 
-            print("Element Not Found")
+                if price <= Price:
+                    send_mail(URL)
+            else: 
+                print("Element Not Found")
+    
+        else:
+            print("Product is out of stock or unavailable. ")
+
+        if "temporarily out of stock" in availability.lower():
+                pass
+        elif "unavailable" in availability.lower():
+                pass
 
 def set_interval():
       try:
