@@ -73,6 +73,14 @@ def check_price(URL, Price):
                 print(title)
                 print(price)
 
+                image_element = soup.find("img", {"id": "landingImage"})
+                if image_element:
+                      image_url = image_element["src"]
+                      print(f"Product Image URL: {image_url}")
+                
+                else: 
+                      print("image not found.")
+
                 if price <= Price:
                     send_mail(URL)
 
