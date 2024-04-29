@@ -8,15 +8,15 @@ include:https://github.com/ksu-is/Amazon-Price-Tracker/blob/main/tracker.py
 https://github.com/PragatiVerma18/amazon-price-tracker-python/blob/master/price-tracker.py
 
 How to use:
-Search your user agent into google and enter it after headers.
+Search your user agent into google and enter it after headers./n
 
-Enter your email and password into server login.
+Enter your email and password into server login./n
 
-Also enter your email next to server.sendmail.
+Also enter your email next to server.sendmail./n
 
-Enter in specfic product ID found on Amazon's product page within the element_availiability section.
+Enter in specfic product ID found on Amazon's product page within the element_availiability section./n
 
-Enter a specfic time interval in minutes that you want to be checked.
+Enter a specfic time interval in minutes that you want to be checked./n
 
 
 Once this is entered into the code itself, the terminal will prompt with the Amazon URL, your email, and the time interval you want to check on the item frequently.  
