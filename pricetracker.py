@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup
 import smtplib
 import time
 
-
 URL = input("Enter Amazon URL: ")
 offer_price = float(input("Enter Wanted Price: "))
 user_email = input("Enter your email: ") 
@@ -43,6 +42,24 @@ def check_price(URL, Price):
         else:
             title = "Title Not Found"
 
+        reviews_count_element = soup.find("span", {"id": "acrCustomerReviewText"})
+        if reviews_count_element:
+              reviews_count_text = reviews_count_element.get_text().strip()
+              reviews_count = int(reviews_count_text.split()[0].replace(',', ''))
+        else:
+              average_rating = 0.0
+
+        rating_element = soup.find("span", {"class": "a-icon-alt"})
+        if rating_element:
+              rating_text = rating_element.get_text().strip()
+              average_rating = float(rating_text.split()[0])
+        else:
+              average_rating = 0.0
+
+        print(f"Product: {title}")
+        print(f"Number of Reviews: {reviews_count}")
+        print(f"Average Rating: {average_rating}")
+
         availability_element = soup.find(id="availability")
         if availability_element:
               availability = availability_element.get_text().strip()
@@ -58,6 +75,7 @@ def check_price(URL, Price):
 
                 if price <= Price:
                     send_mail(URL)
+
             else: 
                 print("Element Not Found")
     
@@ -68,13 +86,14 @@ def check_price(URL, Price):
                 pass
         elif "unavailable" in availability.lower():
                 pass
+        
 
 def set_interval():
       try:
             interval = int(input("Enter the time interval in minutes for checking the price: "))
             return interval * 60
       except ValueError:
-            print("Please enter a valid integeer for the time interval. ")
+            print("Please enter a valid integer for the time interval. ")
             return set_interval()
 
 
@@ -85,7 +104,6 @@ try:
             time.sleep(interval_seconds)
 except KeyboardInterrupt:
         pass
-
 
   
 
