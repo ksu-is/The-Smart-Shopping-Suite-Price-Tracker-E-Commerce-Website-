@@ -14,6 +14,7 @@ headers = {
     "Upgrade-Insecure-Requests": "1"
 }
 
+
 def send_mail(url, user_email):
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.ehlo()
@@ -65,8 +66,9 @@ def check_price(URL, Price):
               availability = availability_element.get_text().strip()
         else:
               availability = "Availabilty Not Found"
-        
+
         if "in stock" in availability.lower():
+            print("Product is in stock!")
             price_element = soup.find('span', class_='a-offscreen')
             if price_element:
                 price = float(price_element.get_text().strip().replace('$', '').replace(',',''))
@@ -75,28 +77,28 @@ def check_price(URL, Price):
 
                 image_element = soup.find("img", {"id": "landingImage"})
                 if image_element:
-                      image_url = image_element["src"]
-                      print(f"Product Image URL: {image_url}")
+                    image_url = image_element["src"]
+                    print(f"Product Image URL: {image_url}")
                 
                 else: 
-                      print("image not found.")
+                  print("image not found.")
 
                 if price <= Price:
                     send_mail(URL)
-
+        
             else: 
-                print("Element Not Found")
-    
+                  print("Element Not Found")
+      
         else:
             print("Product is out of stock or unavailable. ")
 
-        if "temporarily out of stock" in availability.lower():
+            if "temporarily out of stock" in availability.lower():
                 pass
-        elif "unavailable" in availability.lower():
+            elif "unavailable" in availability.lower():
                 pass
-        
 
 def set_interval():
+
       try:
             interval = int(input("Enter the time interval in minutes for checking the price: "))
             return interval * 60
